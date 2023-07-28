@@ -10,3 +10,7 @@ body{
     background-color: blueviolet!important;
     font-family: cursive;
 }
+
+.alert-color{
+    background-color: blueviolet;
+}
