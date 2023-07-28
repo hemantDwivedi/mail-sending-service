@@ -15,30 +15,27 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @RestController
 @CrossOrigin("*")
 public class NewsLetterController {
     private EmailNotificationSender sender;
+    private SubscriptionService subscriptionService;
 
-    public NewsLetterController(EmailNotificationSender sender) {
+    public NewsLetterController(EmailNotificationSender sender, SubscriptionService subscriptionService) {
         this.sender = sender;
+        this.subscriptionService = subscriptionService;
     }
 
     @PostMapping("/api/subscribe")
     public ResponseEntity<String> subscribe(@RequestBody Subscribe subscribe) {
 
         // validation
-        if (subscribe.getName() == null || subscribe.getName().trim().isEmpty() || subscribe.getEmail() == null || subscribe.getEmail().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please provide both your name and email");
+        if (!subscriptionService.isSubscriptionValid(subscribe.getName(), subscribe.getEmail())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please provide both you name and email");
         }
-        String regex = "^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(subscribe.getEmail());
 
-        if (!matcher.matches()) {
+        if (subscriptionService.isEmailValid(subscribe.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please provide a valid email");
         }
 
