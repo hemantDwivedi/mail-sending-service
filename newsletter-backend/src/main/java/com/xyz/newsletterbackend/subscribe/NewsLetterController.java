@@ -1,5 +1,7 @@
 package com.xyz.newsletterbackend.subscribe;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,19 +15,35 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @CrossOrigin("*")
 public class NewsLetterController {
-    private  EmailNotificationSender sender;
+    private EmailNotificationSender sender;
 
     public NewsLetterController(EmailNotificationSender sender) {
         this.sender = sender;
     }
 
     @PostMapping("/api/subscribe")
-    public void subscribe(@RequestBody Subscribe subscribe) {
+    public ResponseEntity<String> subscribe(@RequestBody Subscribe subscribe) {
+
+        // validation
+        if (subscribe.getName() == null || subscribe.getName().trim().isEmpty() || subscribe.getEmail() == null || subscribe.getEmail().trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please provide both your name and email");
+        }
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(subscribe.getEmail());
+
+        if (!matcher.matches()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please provide a valid email");
+        }
+
         MainSender(subscribe.getName(), subscribe.getEmail());
+        return ResponseEntity.ok("You are subscribed successfully");
     }
 
     public void MainSender(String name, String email) {
@@ -52,9 +70,9 @@ public class NewsLetterController {
             }
         });
 
-        try{
+        try {
             sender.sendEmail(name, email, session, senderEmail);
-        } catch (MessagingException e){
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }

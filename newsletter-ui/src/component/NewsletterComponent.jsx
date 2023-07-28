@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../css/NewsletterComponent.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import GithubLogo from '../assets/github.gif'
 
 const NewsletterComponent = () => {
 
@@ -37,7 +38,10 @@ const NewsletterComponent = () => {
                     {subscribed ? (<div className='alert alert-success mt-3'>You are subscribed successfully!</div>)
                         : (
                             <div className="card-body p-5">
-                                <h1 className='fw-bold fs-4 text-center mb-4'>Subscribe to our Newsletter</h1>
+                                <div className="text-center mb-3">
+                                    <img src={GithubLogo} alt="github logo" className='img-fluid' />
+                                </div>
+                                <p className='h1 fw-bold fs-4 text-center mb-4 form-header-text'>Newsletter</p>
                                 <form>
                                     <div className='form-group mb-3'>
                                         <input
