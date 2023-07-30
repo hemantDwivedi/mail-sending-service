@@ -35,7 +35,7 @@ class SubscriptionServiceTest {
     }
     @Test
     public void testInvalidSubscriptionIncorrectEmail() {
-        boolean result = subscriptionService.isEmailValid("user.com");
+        boolean result = subscriptionService.isEmailValid("hemantdwiwedi@gmail.com");
         assertFalse(result, "Incorrect email should return false");
     }
 }
