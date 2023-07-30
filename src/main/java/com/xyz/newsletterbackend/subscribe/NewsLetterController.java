@@ -17,7 +17,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @RestController
-@CrossOrigin("*")
 public class NewsLetterController {
     private EmailNotificationSender sender;
     private SubscriptionService subscriptionService;
