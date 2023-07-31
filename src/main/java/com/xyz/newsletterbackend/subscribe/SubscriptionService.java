@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 public class SubscriptionService {
     public boolean isSubscriptionValid(String name, String email){
         return name != null && !name.trim().isEmpty()
-                && email != null && !email.trim().isEmpty();
+                && email != null && !email.trim().isEmpty() && isEmailValid(email);
     }
 
-    public boolean isEmailValid(String email){
+    private boolean isEmailValid(String email){
         String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@\" \n" +
                 "        + \"[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
         Pattern pattern = Pattern.compile(regex);
