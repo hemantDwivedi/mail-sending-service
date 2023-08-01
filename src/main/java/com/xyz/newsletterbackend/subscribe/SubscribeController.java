@@ -1,15 +1,8 @@
 package com.xyz.newsletterbackend.subscribe;
 
-import com.xyz.newsletterbackend.connection.MailSender;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.mail.MessagingException;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -20,5 +13,10 @@ public class SubscribeController {
     public ResponseEntity<String> subscribe(@RequestBody SubscribeDto subscribeDto) {
         subscribeDataService.newSubscriber(subscribeDto);
         return ResponseEntity.ok("You are subscribed successfully");
+    }
+    @DeleteMapping("/unsubscribe")
+    public ResponseEntity<String> unsubscribe(@RequestParam String email){
+        subscribeDataService.unsubscribe(email);
+        return ResponseEntity.ok("You are unsubscribed successfully");
     }
 }

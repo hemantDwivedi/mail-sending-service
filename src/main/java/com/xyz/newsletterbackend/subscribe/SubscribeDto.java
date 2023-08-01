@@ -13,5 +13,4 @@ import lombok.Setter;
 public class SubscribeDto {
     private String name;
     private String email;
-
 }

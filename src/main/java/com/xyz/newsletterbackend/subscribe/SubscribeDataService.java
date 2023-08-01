@@ -11,7 +11,7 @@ import javax.mail.MessagingException;
 @Service
 @AllArgsConstructor
 public class SubscribeDataService {
-    private final SubscribeRepository subscribeRepository;
+    private final SubscriptionRepository subscriptionRepository;
     private final ModelMapper modelMapper;
     private final SubscriptionService subscriptionService;
     private final MailSender mailSender;
@@ -25,7 +25,7 @@ public class SubscribeDataService {
         // set subscriber ID
         subscriber.setId(new ObjectId().toString());
         // save subscriber to database
-        subscribeRepository.save(subscriber);
+        subscriptionRepository.save(subscriber);
         // sending an email to subscriber
         mailSenderHandler(subscriber);
     }
@@ -36,5 +36,10 @@ public class SubscribeDataService {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void unsubscribe(String email) {
+        var subscriberData = subscriptionRepository.findByEmail(email).get();
+        subscriptionRepository.delete(subscriberData);
     }
 }
