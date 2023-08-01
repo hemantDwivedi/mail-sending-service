@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscribe;
+package com.xyz.newsletterbackend.subscriber;
 
 
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Subscribe {
+public class Subscriber {
     @Id
     private String id;
     private String name;

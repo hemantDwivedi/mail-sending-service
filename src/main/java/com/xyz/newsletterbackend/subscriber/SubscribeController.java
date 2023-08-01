@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscribe;
+package com.xyz.newsletterbackend.subscriber;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class SubscribeController {
-    private final SubscribeDataService subscribeDataService;
-    @PostMapping("/subscribe")
-    public ResponseEntity<String> subscribe(@RequestBody SubscribeDto subscribeDto) {
-        subscribeDataService.newSubscriber(subscribeDto);
+    private final SubscriptionService subscribeDataService;
+    @PostMapping("/subscriber")
+    public ResponseEntity<String> subscribe(@RequestBody SubscriberDto subscriberDto) {
+        subscribeDataService.newSubscriber(subscriberDto);
         return ResponseEntity.ok("You are subscribed successfully");
     }
     @DeleteMapping("/unsubscribe")

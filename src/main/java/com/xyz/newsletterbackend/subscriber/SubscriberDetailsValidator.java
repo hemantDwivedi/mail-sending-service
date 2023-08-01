@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscribe;
+package com.xyz.newsletterbackend.subscriber;
 
 import org.springframework.stereotype.Service;
 
@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class SubscriptionService {
+public class SubscriberDetailsValidator {
     public boolean isSubscriptionValid(String name, String email){
         return name != null && !name.trim().isEmpty()
                 && email != null && !email.trim().isEmpty() && isEmailValid(email);

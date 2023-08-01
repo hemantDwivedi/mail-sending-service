@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscribe;
+package com.xyz.newsletterbackend.subscriber;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SubscribeDto {
+public class SubscriberDto {
     private String name;
     private String email;
 }

@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscribe;
+package com.xyz.newsletterbackend.subscriber;
 
 import com.xyz.newsletterbackend.connection.MailSender;
 import lombok.AllArgsConstructor;
@@ -10,18 +10,18 @@ import javax.mail.MessagingException;
 
 @Service
 @AllArgsConstructor
-public class SubscribeDataService {
+public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final ModelMapper modelMapper;
-    private final SubscriptionService subscriptionService;
+    private final SubscriberDetailsValidator subscriberDetailsValidator;
     private final MailSender mailSender;
 
     // handler method for store new subscriber details {name, email}
-    public void newSubscriber(SubscribeDto subscribeDto){
-        if (subscriptionService.isSubscriptionValid(subscribeDto.getName(), subscribeDto.getEmail())){
+    public void newSubscriber(SubscriberDto subscriberDto){
+        if (subscriberDetailsValidator.isSubscriptionValid(subscriberDto.getName(), subscriberDto.getEmail())){
             throw new RuntimeException("name and email violating");
         }
-        var subscriber = modelMapper.map(subscribeDto, Subscribe.class);
+        var subscriber = modelMapper.map(subscriberDto, Subscriber.class);
         // set subscriber ID
         subscriber.setId(new ObjectId().toString());
         // save subscriber to database
@@ -30,7 +30,7 @@ public class SubscribeDataService {
         mailSenderHandler(subscriber);
     }
 
-    private void mailSenderHandler(Subscribe subscriber) {
+    private void mailSenderHandler(Subscriber subscriber) {
         try {
             mailSender.sendEmail(subscriber.getName(), subscriber.getEmail());
         } catch (MessagingException e) {
