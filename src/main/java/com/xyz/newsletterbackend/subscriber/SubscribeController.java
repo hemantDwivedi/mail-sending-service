@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class SubscribeController {
     private final SubscriptionService subscribeDataService;
-    @PostMapping("/subscriber")
+    @PostMapping("/subscribe")
     public ResponseEntity<String> subscribe(@RequestBody SubscriberDto subscriberDto) {
         subscribeDataService.newSubscriber(subscriberDto);
         return ResponseEntity.ok("You are subscribed successfully");

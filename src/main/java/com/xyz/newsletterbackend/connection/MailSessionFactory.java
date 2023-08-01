@@ -1,23 +1,22 @@
 package com.xyz.newsletterbackend.connection;
 
-import org.apache.commons.pool2.BasePooledObjectFactory;
-import org.apache.commons.pool2.PooledObject;
-import org.apache.commons.pool2.impl.DefaultPooledObject;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class MailSessionFactory extends BasePooledObjectFactory<Session> {
-    @Override
-    public Session create() {
+public class MailSessionFactory {
+    private static final HikariDataSource dataSource = new HikariDataSource();
+
+    static {
         // Create and configure a new JavaMail session
+        dataSource.setMaximumPoolSize(10);
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -37,16 +36,18 @@ public class MailSessionFactory extends BasePooledObjectFactory<Session> {
         properties.put("mail.smtp.username", senderEmail);
         properties.put("mail.smtp.password", senderPassword);
 
-        return Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, senderPassword);
-            }
-        });
+
+        dataSource.setDataSourceProperties(properties);
     }
 
-    @Override
-    public PooledObject<Session> wrap(Session session) {
-        return new DefaultPooledObject<>(session);
+    public static Session getInstance() {
+        var props = dataSource.getDataSourceProperties();
+        Authenticator authenticator = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(props.getProperty("mail.smtp.username"), props.getProperty("mail.smtp.password"));
+            }
+        };
+        return Session.getInstance(dataSource.getDataSourceProperties(), authenticator);
     }
 }

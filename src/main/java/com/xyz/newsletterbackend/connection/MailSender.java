@@ -1,30 +1,22 @@
 package com.xyz.newsletterbackend.connection;
 
-import javax.mail.*;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.pool2.impl.GenericObjectPool;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.stereotype.Component;
-
 @Component
+@AllArgsConstructor
 public class MailSender {
-    private GenericObjectPool<Session> connectionPool;
 
-    public MailSender() {
-        // Configure the connection pool
-        GenericObjectPoolConfig<Session> poolConfig = new GenericObjectPoolConfig<>();
-        poolConfig.setMaxTotal(10); // Maximum number of connections in the pool
-
-        // Create the connection pool with the custom factory
-        connectionPool = new GenericObjectPool<>(new MailSessionFactory(), poolConfig);
-    }
-
-    public void sendEmail(String name, String email) throws MessagingException {
-        Session session = null;
+    public static void sendEmail(String name, String email) throws MessagingException {
         try {
-            session = connectionPool.borrowObject();
+            Session session = MailSessionFactory.getInstance();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
@@ -36,10 +28,6 @@ public class MailSender {
             Transport.send(message);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (session != null){
-                connectionPool.returnObject(session);
-            }
         }
     }
 }
