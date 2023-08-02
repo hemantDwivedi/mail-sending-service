@@ -1,6 +1,5 @@
 package com.xyz.newsletterbackend.connection;
 
-import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.mail.Authenticator;
