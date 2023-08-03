@@ -1,12 +1,15 @@
-package com.xyz.newsletterbackend.user;
+package com.xyz.newsletterbackend.model;
 
-import com.xyz.newsletterbackend.role.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,16 +19,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String id;
-    private String name;
+    private String username;
     private String email;
-    private Role role;
-
-    public Role getRoleName() {
-        return role;
-    }
-
-    public void setRoleName(String roleName) {
-        this.role = new Role();
-        this.role.setName(roleName);
-    }
+    private String password;
+    private Set<Role> roles = new HashSet<>();
 }

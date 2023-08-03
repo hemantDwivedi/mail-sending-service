@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscriber;
+package com.xyz.newsletterbackend.dto;
 
 
 import lombok.AllArgsConstructor;

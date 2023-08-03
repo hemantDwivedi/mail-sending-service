@@ -1,5 +1,7 @@
-package com.xyz.newsletterbackend.subscriber;
+package com.xyz.newsletterbackend.controller;
 
+import com.xyz.newsletterbackend.dto.SubscriberDto;
+import com.xyz.newsletterbackend.service.SubscriptionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

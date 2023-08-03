@@ -13,7 +13,7 @@ class SubscriberDetailsValidatorTest {
 
     @Test
     public void testValidSubscription(){
-        boolean result = subscriberDetailsValidator.isSubscriptionValid("test user", "testuser@testing.com");
+        boolean result = subscriberDetailsValidator.isSubscriptionValid("test repository", "testuser@testing.com");
         assertTrue(result, "Valid subscription should return true");
     }
     @Test

@@ -1,6 +1,10 @@
-package com.xyz.newsletterbackend.subscriber;
+package com.xyz.newsletterbackend.service;
 
 import com.xyz.newsletterbackend.connection.MailSender;
+import com.xyz.newsletterbackend.dto.SubscriberDto;
+import com.xyz.newsletterbackend.model.Subscriber;
+import com.xyz.newsletterbackend.repository.SubscriptionRepository;
+import com.xyz.newsletterbackend.utils.SubscriberDetailsValidator;
 import lombok.AllArgsConstructor;
 import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;

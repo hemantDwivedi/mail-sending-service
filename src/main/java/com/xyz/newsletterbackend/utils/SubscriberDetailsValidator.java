@@ -1,4 +1,4 @@
-package com.xyz.newsletterbackend.subscriber;
+package com.xyz.newsletterbackend.utils;
 
 import org.springframework.stereotype.Service;
 

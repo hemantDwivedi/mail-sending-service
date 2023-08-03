@@ -1,6 +1,6 @@
-package com.xyz.newsletterbackend.user;
+package com.xyz.newsletterbackend.model;
 
-import com.xyz.newsletterbackend.role.Role;
+import com.xyz.newsletterbackend.model.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+@Document("roles")
+public class Role {
     private String id;
-    private String name;
-    private String email;
-    private Role role;
+    private ERole name;
 }
