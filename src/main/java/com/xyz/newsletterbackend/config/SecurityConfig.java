@@ -37,9 +37,11 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/api/auth/**")
                             .permitAll()
+                            .requestMatchers("/api/v1/newsletter")
+                            .permitAll()
                             .requestMatchers(HttpMethod.PUT)
                             .hasRole("STAFF")
-                            .requestMatchers(HttpMethod.POST)
+                            .requestMatchers("/api/v1/**")
                             .permitAll()
                             .anyRequest()
                             .authenticated();

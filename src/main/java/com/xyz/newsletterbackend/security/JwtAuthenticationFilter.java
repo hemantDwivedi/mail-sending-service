@@ -1,5 +1,6 @@
 package com.xyz.newsletterbackend.security;
 
+import com.xyz.newsletterbackend.repository.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @Component
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private TokenRepository tokenRepository;
     private JwtTokenProvider jwtTokenProvider;
     private UserDetailsService userDetailsService;
     @Override
@@ -26,6 +28,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = getTokenFromRequest(request);
+
+        if(tokenRepository.findByName(token).orElse(null) != null){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
 
         if(StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)){
             String username = jwtTokenProvider.getUsername(token);
