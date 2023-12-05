@@ -18,7 +18,6 @@ public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final ModelMapper modelMapper;
     private final SubscriberDetailsValidator subscriberDetailsValidator;
-    private final MailSender mailSender;
 
     // handler method for store new subscriber details {name, email}
     public void newSubscriber(SubscriberDto subscriberDto){
