@@ -18,18 +18,14 @@ public class MailSender {
 
     private static final Logger logger = LoggerFactory.getLogger(MailSender.class);
 
-    public static void sendEmail(String name, String email) throws MessagingException {
+    public static void sendEmail(String name, String email, String customMessage) throws MessagingException {
         try {
             Session session = MailSessionFactory.getInstance();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-            message.setSubject("Thanks for Subscribing Our Newsletter");
-            message.setText(
-                    "Dear " + name + ",\n\n" +
-                    "Welcome to our application! We are excited to have you.\n\n" +
-                    "Best regards,\n" +
-                    "Your Application Team");
+            message.setSubject("CHECK THIS EMAIL PLEASE");
+            message.setText(customMessage);
             Transport.send(message);
         } catch (Exception e) {
             logger.error("MailSender Class Error: { }", e);

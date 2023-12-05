@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class SubscriberDetailsValidator {
+public class EmailDetailsValidator {
     public boolean isSubscriptionValid(String name, String email){
         return name != null && !name.trim().isEmpty()
                 && email != null && !email.trim().isEmpty() && isEmailValid(email);

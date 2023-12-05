@@ -16,10 +16,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity(name = "subscribers")
-public class Subscriber {
+public class EmailRawData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
+    private String targetEmail;
+    private String message;
 }

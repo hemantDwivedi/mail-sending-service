@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Newsletter API", description = "Documentation for the Backend Newsletter API", version = "1.0.0"))
-public class NewsletterBackendApplication {
+@OpenAPIDefinition(info = @Info(title = "Mail Sending Service API", description = "Documentation for the Backend Mail Sending Service API", version = "1.0.0"))
+public class MailSendingServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NewsletterBackendApplication.class, args);
+		SpringApplication.run(MailSendingServiceApplication.class, args);
 	}
 
 	@Bean
