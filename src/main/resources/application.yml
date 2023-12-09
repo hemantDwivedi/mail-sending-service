@@ -1,16 +1,2 @@
-spring:
-  datasource:
-    username: root
-    password: zero
-    url: jdbc:mysql://localhost:3306/emailservicedb
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: update
-
-#spring:
-#  data:
-#    mongodb:
-#      host: localhost
-#      port: 27017
-#      database: newsletter
+server:
+  port: 8000

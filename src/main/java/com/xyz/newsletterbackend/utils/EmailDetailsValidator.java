@@ -7,9 +7,8 @@ import java.util.regex.Pattern;
 
 @Service
 public class EmailDetailsValidator {
-    public boolean isSubscriptionValid(String name, String email){
-        return name != null && !name.trim().isEmpty()
-                && email != null && !email.trim().isEmpty() && isEmailValid(email);
+    public boolean isSubscriptionValid(String email){
+        return email != null && !email.trim().isEmpty() && isEmailValid(email);
     }
 
     private boolean isEmailValid(String email){

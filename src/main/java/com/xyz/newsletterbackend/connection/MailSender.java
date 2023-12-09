@@ -18,13 +18,13 @@ public class MailSender {
 
     private static final Logger logger = LoggerFactory.getLogger(MailSender.class);
 
-    public static void sendEmail(String name, String email, String customMessage) throws MessagingException {
+    public static void sendEmail(String email, String customMessage) throws MessagingException {
         try {
             Session session = MailSessionFactory.getInstance();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-            message.setSubject("CHECK THIS EMAIL PLEASE");
+            message.setSubject("GOT AN EMAIL");
             message.setText(customMessage);
             Transport.send(message);
         } catch (Exception e) {
