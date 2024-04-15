@@ -13,11 +13,11 @@ import javax.mail.MessagingException;
 @Service
 @AllArgsConstructor
 public class EmailSenderService {
-    private final EmailDetailsValidator emailDetailsValidator;
+    private EmailDetailsValidator validator;
 
     public void newMail(MailRequest mailRequest){
-        if (emailDetailsValidator.isSubscriptionValid(mailRequest.getTargetEmail())){
-            throw new ApiException(HttpStatus.BAD_REQUEST, "Email violating");
+        if (!validator.isSubscriptionValid(mailRequest.getTargetEmail())){
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid email");
         }
         mailSenderHandler(mailRequest);
     }
