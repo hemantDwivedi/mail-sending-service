@@ -13,12 +13,12 @@ class EmailRawDataDetailsValidatorTest {
     private EmailDetailsValidator emailDetailsValidator;
 
     @Test
-    public void testValidSubscription(){
+    void testValidSubscription(){
         boolean result = emailDetailsValidator.isSubscriptionValid("testuser@testing.com");
         assertTrue(result, "Valid subscription should return true");
     }
     @Test
-    public void testInvalidSubscriptionBlankFields() {
+    void testInvalidSubscriptionBlankFields() {
         boolean result = emailDetailsValidator.isSubscriptionValid("");
         assertFalse(result, "Blank fields should return false");
     }

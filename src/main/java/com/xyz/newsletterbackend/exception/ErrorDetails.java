@@ -2,17 +2,13 @@ package com.xyz.newsletterbackend.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class ErrorDetails {
-    private LocalDateTime timeStamp;
     private String message;
-    private String details;
+    private HttpStatus status;
 }
