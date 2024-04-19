@@ -14,13 +14,15 @@ import javax.mail.MessagingException;
 @AllArgsConstructor
 public class EmailSenderService {
     private EmailDetailsValidator validator;
+    private DataService dataService;
 
     public void newMail(MailRequest mailRequest){
-        System.out.println(mailRequest.getEmail());
         if (!validator.isSubscriptionValid(mailRequest.getEmail())){
             throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid email");
         }
         mailSenderHandler(mailRequest);
+
+        dataService.saveData(mailRequest);
     }
 
     private void mailSenderHandler(MailRequest mailRequest) {
