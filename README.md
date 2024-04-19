@@ -14,8 +14,9 @@ Here're some of the project's best features:
 *   Real-time monitoring of sent emails.
 *   Email validation
 
-<h2>👁️ Dashboard </h2>
-![Screenshot (130)](https://github.com/hemantDwivedi/mail-sending-service/assets/96649329/4e4382df-4f8c-4bb4-ab59-7d04e5d52509)
+## 👁️ Dashboard
+![Screenshot (130)](https://github.com/hemantDwivedi/mail-sending-service/assets/96649329/48714986-e578-4b78-869a-b6e8cb6c60cb)
+
 
   
   
