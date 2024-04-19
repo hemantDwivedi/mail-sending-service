@@ -16,7 +16,8 @@ public class EmailSenderService {
     private EmailDetailsValidator validator;
 
     public void newMail(MailRequest mailRequest){
-        if (!validator.isSubscriptionValid(mailRequest.getTargetEmail())){
+        System.out.println(mailRequest.getEmail());
+        if (!validator.isSubscriptionValid(mailRequest.getEmail())){
             throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid email");
         }
         mailSenderHandler(mailRequest);
@@ -24,7 +25,7 @@ public class EmailSenderService {
 
     private void mailSenderHandler(MailRequest mailRequest) {
         try {
-            MailSender.sendEmail(mailRequest.getTargetEmail(), mailRequest.getMessage());
+            MailSender.sendEmail(mailRequest.getEmail(), mailRequest.getMessage());
         } catch (MessagingException e) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Service unavailable");
         }

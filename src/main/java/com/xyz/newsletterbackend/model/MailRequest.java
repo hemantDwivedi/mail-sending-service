@@ -12,6 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MailRequest {
-    private String targetEmail;
+    private String email;
     private String message;
 }
