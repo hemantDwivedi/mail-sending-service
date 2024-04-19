@@ -20,7 +20,7 @@ public class EmailSenderService {
         if (!validator.isSubscriptionValid(mailRequest.getEmail())){
             throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid email");
         }
-//        mailSenderHandler(mailRequest);
+        mailSenderHandler(mailRequest);
 
         dataService.saveData(mailRequest);
     }

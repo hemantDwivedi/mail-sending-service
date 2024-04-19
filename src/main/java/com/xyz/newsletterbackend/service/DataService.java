@@ -17,7 +17,11 @@ public class DataService {
 
 
     public void saveData(MailRequest mailRequest){
-        MailHistory data = new MailHistory(mailRequest.getEmail(), mailRequest.getMessage(), getDateNow());
+        MailHistory data = MailHistory.builder()
+                .email(mailRequest.getEmail())
+                .body(mailRequest.getMessage())
+                .date(getDateNow())
+                .build();
         mailRepository.save(data);
     }
 

@@ -23,7 +23,7 @@
                     <tr class="border-b border-gray-200 hover:bg-gray-100" th:each="mail: ${mails}">
                         <td class="py-3 px-6 text-left whitespace-nowrap" th:text="${mail.email}"></td>
                         <td class="py-3 px-6 text-left" th:text="${mail.body}"></td>
-                        <td class="py-3 px-6 text-left" th:text="${mail.time}"></td>
+                        <td class="py-3 px-6 text-left" th:text="${mail.date}"></td>
                     </tr>
                 </tbody>
             </table>
