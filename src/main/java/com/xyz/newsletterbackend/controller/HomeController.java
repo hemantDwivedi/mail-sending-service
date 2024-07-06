@@ -6,30 +6,25 @@ import com.xyz.newsletterbackend.service.DataService;
 import com.xyz.newsletterbackend.service.EmailSenderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/")
+@RestController
+@RequestMapping("/api/v1/")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class HomeController {
     private final EmailSenderService emailSenderService;
     private final DataService dataService;
-    @PostMapping("/api/v1/mail")
+    @PostMapping("mails")
     public ResponseEntity<String> mailService(@RequestBody MailRequest mailRequest) {
         emailSenderService.newMail(mailRequest);
         return ResponseEntity.ok("You are subscribed successfully");
     }
 
-    @GetMapping
-    public String index(Model model){
-        List<MailHistory> mails = dataService.getAllHistory();
-
-        model.addAttribute("mails", mails);
-
-        return "index";
+    @GetMapping("mails")
+    public ResponseEntity<List<MailHistory>> fetchMails(){
+        return ResponseEntity.ok(dataService.getAllHistory());
     }
 }

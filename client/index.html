@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mail - Server</title>
+</head>
+
+<body class="bg-white text-black text-sm">
+    <header>
+        <nav class="border-b">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <a href="/" class="rounded-md font-bold text-3xl">Mail Service</a>
+                    <div class="flex flex-1 items-center justify-end sm:items-stretch">
+                        <div class="sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                                <a href="/" class="rounded-md px-3 py-2 text-sm font-medium">Monitor</a>
+                                <a href="/test.html" class="rounded-md px-3 py-2 text-sm font-medium">Test</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="container mx-auto pt-8">
+            <div class="overflow-x-auto">
+                <table class="table-auto overflow-hidden w-[80%] mx-auto">
+                    <thead class="text-sm leading-normal bg-gray-50">
+                        <tr class="border">
+                            <th class="px-6 py-3 text-left">Email</th>
+                            <th class="px-6 py-3 text-left">Content</th>
+                            <th class="px-6 py-3 text-left">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-medium" id="mails">
+                    </tbody>
+                    <tfoot class="fixed bottom-0 pb-2 text-sm bg-white w-full">
+                        <tr class="font-semibold">
+                            <th scope="row" class="px-3 py-3 text-base">Total:</th>
+                            <td class="py-3" id="totalData"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+
+        var httpx = new XMLHttpRequest();
+        console.log('fetching...');
+        httpx.open('GET', 'http://localhost:8000/api/v1/mails', true);
+        httpx.send();
+
+        httpx.onload = function () {
+
+            let obj = JSON.parse(httpx.responseText);
+            let list = document.getElementById('mails');
+            let totalRows = 0;
+            jsons = "";
+            for (key in obj) {
+                jsons += `  <tr class="border hover:bg-gray-100"">
+                            <td class="py-3 px-6 text-left">${obj[key].email}</td>
+                            <td class="py-3 px-6 text-left">${obj[key].body}</td>
+                            <td class="py-3 px-6 text-left">${obj[key].date}</td>
+                        </tr>`;
+                totalRows++;
+            }
+            list.innerHTML = jsons;
+
+            let total = document.getElementById('totalData');
+            total.innerHTML = totalRows;
+        }
+    </script>
+</body>
+
+</html>
