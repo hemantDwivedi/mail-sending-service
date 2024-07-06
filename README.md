@@ -14,18 +14,23 @@ Here're some of the project's best features:
 *   Real-time monitoring of sent emails.
 *   Email validation
 
-## 👁️ Dashboard
-![Screenshot (130)](https://github.com/hemantDwivedi/mail-sending-service/assets/96649329/48714986-e578-4b78-869a-b6e8cb6c60cb)
+## 👁️ Dashboard Page
+![Screenshot (132)](https://github.com/hemantDwivedi/mail-sending-service/assets/96649329/1a2f9cc4-83f9-45f8-a6aa-a086268f655d)
 
+## Test Mail Service Page
+![Screenshot (133)](https://github.com/hemantDwivedi/mail-sending-service/assets/96649329/4fca3bbb-f93a-49fa-859f-a6438cf4d7d5)
 
   
   
 <h2>💻 Built with</h2>
 
-Technologies used in the project:
+Tech Stacks:
 
 *   Spring Boot
 *   Java Mail API
+*   AJAX
+*   HTML
+*   Tailwind CSS
 *   Apache validator
 *   Docker
 *   AWS
