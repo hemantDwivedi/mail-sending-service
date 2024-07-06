@@ -24,8 +24,8 @@ public class MailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(email));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-            message.setSubject("GOT AN EMAIL");
-            message.setText(customMessage);
+            message.setSubject("Mail From " + email);
+            message.setContent("<h2>" + customMessage + "</h2>", "text/html");
             Transport.send(message);
         } catch (Exception e) {
             logger.error("MailSender Class Error: { }", e);

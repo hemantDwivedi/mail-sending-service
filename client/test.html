@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mail - Server</title>
+</head>
+
+<body class="bg-white text-black text-sm">
+    <header>
+        <nav class="border-b">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <a href="/" class="rounded-md font-bold text-3xl">Mail Service</a>
+                    <div class="flex flex-1 items-center justify-end sm:items-stretch">
+                        <div class="sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                                <a href="/" class="rounded-md px-3 py-2 text-sm font-medium">Monitor</a>
+                                <a href="/test" class="rounded-md px-3 py-2 text-sm font-medium">Test</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="w-[40%] mx-auto mt-5">
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Recipient Email
+                    </label>
+                    <input name="email" id="email"
+                        class="bg-gray-50 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="email" placeholder="Email">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Message
+                    </label>
+                    <textarea name="message" id="message"
+                        class="bg-gray-50 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" placeholder="Message..." rows="6"></textarea>
+                </div>
+                <div class="mb-4">
+                    <button
+                        class="bg-zinc-900 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="button" onclick="doPostRequest()">
+                        Send
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function doPostRequest() {   
+            var httpx = new XMLHttpRequest();
+            httpx.open('POST', 'http://localhost:8000/api/v1/mails', true);
+            httpx.setRequestHeader("Content-type", "application/json");
+            
+            let email = document.getElementById('email').value;
+            let message = document.getElementById('message').value;
+            // let mailRequest = {email: email, message: message};
+            let obj = `{\"email\": \"${email}\", \"message\": \"${message}\"}`;
+            console.log(obj);
+            httpx.send(obj);
+        }
+    </script>
+</body>
+
+</html>
